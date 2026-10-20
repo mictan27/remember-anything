@@ -87,7 +87,10 @@ export function App() {
       <main style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>{screen}</main>
       {!inSession && (
         <footer className="foot">
-          <span>everything stays in this browser · nothing is sent anywhere</span>
+          <span>
+            everything stays in this browser · built by michael tan ·{" "}
+            <a className="link" href="https://github.com/mictan27/remember-anything" target="_blank" rel="noopener noreferrer">github</a>
+          </span>
           {streak && <span>{streak}</span>}
         </footer>
       )}
