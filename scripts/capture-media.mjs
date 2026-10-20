@@ -1,4 +1,4 @@
-// Captures the README screenshots and demo GIF from the live site (or any URL).
+// Captures the README close-ups and demo GIF from the live site (or any URL).
 //   node scripts/capture-media.mjs [url]
 // Needs ffmpeg on PATH for the GIF. Writes to docs/.
 import { chromium } from "@playwright/test";
@@ -11,41 +11,7 @@ const SITE = process.argv[2] ?? "https://www.rememberanyth.ing";
 const OUT = new URL("../docs/", import.meta.url).pathname;
 mkdirSync(OUT, { recursive: true });
 
-const DAY = 86_400_000;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-/** Puts example data into this (headless, throwaway) browser's storage. */
-async function seed(page, data) {
-  await page.evaluate(async (entries) => {
-    await new Promise((resolve, reject) => {
-      const open = indexedDB.open("keyval-store");
-      open.onupgradeneeded = () => open.result.createObjectStore("keyval");
-      open.onsuccess = () => {
-        const tx = open.result.transaction("keyval", "readwrite");
-        for (const [k, v] of entries) tx.objectStore("keyval").put(v, k);
-        tx.oncomplete = resolve;
-        tx.onerror = () => reject(tx.error);
-      };
-    });
-  }, Object.entries(data));
-}
-
-function exampleData(now) {
-  const item = (id, label, chunks, srs, sensitive = true) => ({
-    id, label, value: chunks.join(""), kind: /^\d+$/.test(chunks.join("")) ? "digits" : "alnum",
-    chunks, sensitive, hooks: chunks.map(() => null), createdAt: now - DAY, srs,
-  });
-  return {
-    items: [
-      item("a", "passport", ["X123", "45678"], { step: 1, due: now - 1000 }),
-      item("b", "visa", ["4532", "8812", "0071", "9930"], { step: 0, due: now + DAY }),
-      item("c", "mum's phone", ["415", "555", "0123"], { step: 2, due: now + 7 * DAY }, false),
-      item("d", "bike lock", ["7294"], { step: 3, due: now + 16 * DAY }),
-    ],
-    pi: { frontier: 12, best: 60 },
-    streak: { day: new Date(now).toISOString().slice(0, 10), count: 4 },
-  };
-}
 
 async function waitHint(page, re) {
   await page.locator(".hint").filter({ hasText: re }).waitFor();
@@ -101,12 +67,14 @@ async function learnCard(page, { delay, look, shot }) {
   await page.locator(".results").waitFor();
 }
 
-async function screenshots(browser) {
+/** Close-ups of the digit line, its hook and hint, for the step-by-step images. */
+async function closeUps(browser) {
   const ctx = await browser.newContext({ viewport: { width: 1000, height: 680 }, deviceScaleFactor: 2, serviceWorkers: "block" });
   const page = await ctx.newPage();
-  const shot = async (name) => page.screenshot({ path: join(OUT, `${name}.png`) });
-  // A close-up of the digit line, its hook and hint, for the step-by-step images.
+  const taken = new Set();
   const closeUp = async (name) => {
+    if (taken.has(name)) return;
+    taken.add(name);
     const box = await page.locator(".line").boundingBox();
     const w = 640, h = 260;
     await page.screenshot({ path: join(OUT, `${name}.png`), clip: { x: box.x + box.width / 2 - w / 2, y: box.y - 60, width: w, height: h } });
@@ -116,42 +84,9 @@ async function screenshots(browser) {
   await page.locator("#value").waitFor();
   await page.locator("#value").fill("4532 8812 0071 9930");
   await page.locator("#label").fill("visa");
-  await sleep(500);
-  await shot("add");
   await page.keyboard.press("Enter");
-  const once = new Set();
-  await learnCard(page, { delay: 20, look: 700, shot: async (name) => { if (!once.has(name)) { once.add(name); await closeUp(name); } } });
-  await sleep(900);
-  await shot("results");
-
-  await seed(page, exampleData(Date.now()));
-  await page.goto(SITE + "/#/");
-  await page.reload();
-  await page.locator(".row").first().waitFor();
-  await sleep(700);
-  await shot("home");
-
-  await page.goto(SITE + "/#/pi");
-  await waitHint(page, /remember this/);
-  await sleep(900);
-  await shot("pi");
+  await learnCard(page, { delay: 20, look: 700, shot: closeUp });
   await ctx.close();
-
-  const phone = await browser.newContext({ viewport: { width: 390, height: 640 }, deviceScaleFactor: 3, isMobile: true, hasTouch: true, serviceWorkers: "block" });
-  const p = await phone.newPage();
-  await p.goto(SITE);
-  await p.locator("#value").fill("415 555 0123");
-  await p.locator("#label").fill("mum's phone");
-  await p.keyboard.press("Enter");
-  await p.locator(".hint").filter({ hasText: /remember this/ }).waitFor();
-  await sleep(800);
-  await p.screenshot({ path: join(OUT, "phone-flash.png") });
-  await p.locator(".session-body").tap();
-  await p.locator(".hint").filter({ hasText: /type it/ }).waitFor();
-  await p.keyboard.type("41");
-  await sleep(500);
-  await p.screenshot({ path: join(OUT, "phone-typing.png") });
-  await phone.close();
 }
 
 async function demoGif(browser) {
@@ -198,7 +133,7 @@ async function demoGif(browser) {
 
 const browser = await chromium.launch();
 try {
-  await screenshots(browser);
+  await closeUps(browser);
   await demoGif(browser);
 } finally {
   await browser.close();

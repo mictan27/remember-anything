@@ -1,35 +1,33 @@
-<div align="center">
+<p align="center">
+  <a href="https://rememberanyth.ing"><img src="docs/banner.svg" alt="rememberanyth.ing" width="100%"></a>
+</p>
 
-<a href="https://rememberanyth.ing"><img src="docs/banner.svg" alt="rememberanyth.ing" width="100%"></a>
+<p align="center">
+  <b>Remember any number. Your card, your passport, your mum's phone, or a hundred digits of π.</b>
+</p>
 
-<br>
+<p align="center">
+  Chunk it, type it back, and review it until it sticks.<br>
+  No accounts, no servers. Nothing you type ever leaves your browser.
+</p>
 
-**Remember any number. Your card, your passport, your mum's phone, or a hundred digits of π.**
+<p align="center">
+  <a href="https://rememberanyth.ing"><img src="https://img.shields.io/badge/try_it-rememberanyth.ing-6fcfae?style=for-the-badge&labelColor=24262b" alt="Try it at rememberanyth.ing"></a>
+</p>
 
-Chunk it, type it back, and review it until it sticks.<br>
-No accounts, no servers. Nothing you type ever leaves your browser.
+<p align="center">
+  <img src="https://img.shields.io/badge/data-stays_on_your_device-d8dbe2?style=flat-square&labelColor=24262b" alt="Data stays on your device">
+  <img src="https://img.shields.io/badge/works-offline-d8dbe2?style=flat-square&labelColor=24262b" alt="Works offline">
+  <img src="https://img.shields.io/badge/react-19-d8dbe2?style=flat-square&labelColor=24262b" alt="React 19">
+  <img src="https://img.shields.io/badge/vite-8-d8dbe2?style=flat-square&labelColor=24262b" alt="Vite 8">
+  <img src="https://img.shields.io/badge/typescript-strict-d8dbe2?style=flat-square&labelColor=24262b" alt="TypeScript strict">
+</p>
 
-<br>
-
-<a href="https://rememberanyth.ing"><img src="https://img.shields.io/badge/try_it-rememberanyth.ing-6fcfae?style=for-the-badge&labelColor=24262b" alt="Try it at rememberanyth.ing"></a>
-
-<br><br>
-
-<img src="https://img.shields.io/badge/data-stays_on_your_device-d8dbe2?style=flat-square&labelColor=24262b" alt="Data stays on your device">
-<img src="https://img.shields.io/badge/works-offline-d8dbe2?style=flat-square&labelColor=24262b" alt="Works offline">
-<img src="https://img.shields.io/badge/react-19-d8dbe2?style=flat-square&labelColor=24262b" alt="React 19">
-<img src="https://img.shields.io/badge/vite-8-d8dbe2?style=flat-square&labelColor=24262b" alt="Vite 8">
-<img src="https://img.shields.io/badge/typescript-strict-d8dbe2?style=flat-square&labelColor=24262b" alt="TypeScript strict">
-
-<br><br>
-
-<a href="https://rememberanyth.ing"><img src="docs/demo.gif" alt="Learning a card number on rememberanyth.ing: each chunk flashes with a hook, gets typed back, and one wrong digit restarts only that chunk" width="860"></a>
-
-<sub>Learning a card number in about 15 seconds, one deliberate mistake included. Recorded on <a href="https://rememberanyth.ing">rememberanyth.ing</a>.</sub>
-
-</div>
-
-<br>
+<p align="center">
+  <a href="https://rememberanyth.ing"><img src="docs/demo.gif" alt="Learning a card number on rememberanyth.ing: each chunk flashes with a hook, gets typed back, and one wrong digit restarts only that chunk" width="860"></a>
+  <br>
+  <sub>Learning a card number in about 15 seconds, one deliberate mistake included. Recorded on <a href="https://rememberanyth.ing">rememberanyth.ing</a>.</sub>
+</p>
 
 ## How it works
 
@@ -54,35 +52,6 @@ Most people can hold about four things in their head at once. A 16-digit card nu
 4. **Chain it.** After each new chunk, you type everything learned so far from the start.
 5. **One clean run.** The whole number, no hints, no mistakes.
 6. **Come back.** Reviews arrive 1, 3, 7, 16, 35 and 90 days later. Each one takes about ten seconds.
-
-## Screens
-
-<table>
-  <tr>
-    <td width="50%"><img src="docs/add.png" alt="Adding a card number"></td>
-    <td width="50%"><img src="docs/results.png" alt="Results with accuracy, restarts, time and editable hooks"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub><b>Add anything.</b> Paste it and see how it'll be chunked.</sub></td>
-    <td align="center"><sub><b>Results.</b> Edit the hooks to make them yours.</sub></td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="docs/home.png" alt="Home screen listing numbers and when each is due"></td>
-    <td width="50%"><img src="docs/pi.png" alt="Learning the digits of pi"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub><b>Your numbers.</b> Sensitive ones stay masked. Reviews surface when due.</sub></td>
-    <td align="center"><sub><b>π mode.</b> Twenty new digits a round, as far as you want to go.</sub></td>
-  </tr>
-</table>
-
-<div align="center">
-  <img src="docs/phone-flash.png" alt="Learning a phone number on a phone" width="220">
-  &nbsp;&nbsp;&nbsp;
-  <img src="docs/phone-typing.png" alt="Typing on a phone with the number pad" width="220">
-  <br>
-  <sub><b>On your phone too.</b> The number pad opens automatically, and it installs like an app.</sub>
-</div>
 
 ## Why it works
 
@@ -173,12 +142,13 @@ docs/
   </tr>
 </table>
 
-<br>
+---
 
-<div align="center">
-  <a href="https://rememberanyth.ing"><b>rememberanyth.ing</b></a>
-  <br>
+<p align="center">
+  <a href="https://rememberanyth.ing"><b>rememberanyth.ing</b></a><br>
   <sub>For everyone who has ever dug out their passport to fill in a form.</sub>
-  <br><br>
+</p>
+
+<p align="center">
   Built by <b>Michael Tan</b> · <a href="https://github.com/mictan27/remember-anything">github.com/mictan27/remember-anything</a>
-</div>
+</p>
